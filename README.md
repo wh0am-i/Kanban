@@ -4,7 +4,7 @@ Sistema de estoque
 Aplicativo Android feito no android studio. 
 O objetivo do aplicativo é o usuário adicionar novos produtos a uma lista de compras, por exemplo. Ele pode adicionar o nome do produto, a categoria dele e o preço. 
 
-##👥 Alunos:
+## 👥 Alunos:
  - Nicole Licyane;
  - Gustavo Braga;
  - Pedro Dias;
