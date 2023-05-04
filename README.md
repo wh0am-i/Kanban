@@ -22,3 +22,11 @@ Figma de orientação: <a href="https://www.figma.com/file/oFOFdrhwGnYshsSdEYMto
  - Botão “Cadastrar”: Possibilita cadastrar um novo produto na lista;
  - Botão de editar: Possibilita editar um produto já adicionado na lista;
  - Botão de excluir: Possibilita excluir um produto já adicionado na lista.
+### Alert Dialog 
+ - Campo de texto produto: Onde o usuário pode editar o nome do produto adicionado na lista;
+ - Campo de texto categoria: Onde o usuário pode editar a categoria do produto adicionado na lista;
+ - Campo de texto preço: Onde o usuário pode editar o preço do produto adicionado na lista;
+ - Botão "confirmar": Possibilita concluir a edição de um produto já adicionado na lista com as novas informações;
+
+
+
