@@ -1,4 +1,4 @@
-# Kanban 🖼
+# Sistema de estoque - Kanban
 Criação de um sistema de estoque. Seguindo orientações de um documento de Metodologia Ágil Kanban
 Sistema de estoque
 Aplicativo Android feito no android studio. 
