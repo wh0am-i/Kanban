@@ -6,8 +6,8 @@ O objetivo do aplicativo é o usuário adicionar novos produtos a uma lista de c
 Figma de orientação: <a href="https://www.figma.com/file/oFOFdrhwGnYshsSdEYMtox/Kanban?type=design&node-id=11%3A16026&t=3ArsGfSvHSJM872R-1">Figma</a>
 
 ## 👥 Alunos:
- - Nicole Licyane;
  - Gustavo Braga;
+ - Nicole Licyane;
  - Pedro Dias;
  - Pedro Henrique.
 
