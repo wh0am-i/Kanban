@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.text.Editable;
+import android.text.InputType;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -87,7 +88,10 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.MyViewHolder> {
 
       editText1.setText(p.getNome());
       editText2.setText(p.getCategoria());
-      editText3.setText(p.getPreco() + "");
+
+      editText3.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+
+      editText3.setText(p.getPreco()+"");
 
       layout.addView(editText1);
       layout.addView(editText2);
