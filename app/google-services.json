@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "855420643584",
+    "project_id": "produtos-66201",
+    "storage_bucket": "produtos-66201.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:855420643584:android:231bd34488c083088fabe5",
+        "android_client_info": {
+          "package_name": "com.example.kanban"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "855420643584-fjhgkgcgi603uasorsklrfn5oad2lr2g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMNwyMq9I3GZOveU2_qORtsn7IRFGdCZA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "855420643584-fjhgkgcgi603uasorsklrfn5oad2lr2g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

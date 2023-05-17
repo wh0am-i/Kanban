@@ -91,7 +91,7 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.MyViewHolder> {
 
       editText3.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
 
-      editText3.setText(p.getPreco()+"");
+      editText3.setText(p.getPreco() + "");
 
       layout.addView(editText1);
       layout.addView(editText2);

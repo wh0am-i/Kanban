@@ -1,9 +1,15 @@
 package com.example.kanban;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class Produto {
   String nome, categoria;
   float preco;
   int id;
+
+  public Produto() {
+  }
 
   public Produto(String nome, String categoria, float preco, int id) {
     this.nome = nome;
@@ -42,5 +48,10 @@ public class Produto {
 
   public void setId(int id) {
     this.id = id;
+  }
+
+  public void salvar() {
+    DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+    reference.child("Produtos").child(id + "").setValue(this);
   }
 }
