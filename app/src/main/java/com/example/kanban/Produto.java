@@ -52,6 +52,6 @@ public class Produto {
 
   public void salvar() {
     DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
-    reference.child("Produtos").child(id + "").setValue(this);
+    reference.child("Produtos").child(nome).setValue(this);
   }
 }

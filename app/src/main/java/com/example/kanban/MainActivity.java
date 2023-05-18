@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
   int productId;
 
   Adaptador adapter;
+  DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -55,19 +57,33 @@ public class MainActivity extends AppCompatActivity {
       Toast.makeText(this, "Insira todos os campos para criar o produto!", Toast.LENGTH_SHORT).show();
       return false;
     }
-    if(listaProdutos.isEmpty()){
-      productId++;
-    } else {
-      int ultimaPosicao = listaProdutos.size()-1;
-      System.out.println(ultimaPosicao);
-      productId = listaProdutos.get(ultimaPosicao).getId();
-      productId++;
-    }
-    Produto p1 = new Produto(nomeProduto.getText().toString(), categoriaProduto.getText().toString(), Float.parseFloat(precoProduto.getText().toString()), productId);
-    p1.salvar();
-    nomeProduto.setText("");
-    categoriaProduto.setText("");
-    precoProduto.setText("");
+
+    reference.child("Produtos").child(nomeProduto.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
+      @Override
+      public void onDataChange(@NonNull DataSnapshot snapshot) {
+        if (!snapshot.exists()) {
+          if (listaProdutos.isEmpty()) {
+            productId++;
+          } else {
+            int ultimaPosicao = listaProdutos.size() - 1;
+            productId = listaProdutos.get(ultimaPosicao).getId();
+            productId++;
+          }
+          Produto p1 = new Produto(nomeProduto.getText().toString(), categoriaProduto.getText().toString(), Float.parseFloat(precoProduto.getText().toString()), productId);
+          p1.salvar();
+          nomeProduto.setText("");
+          categoriaProduto.setText("");
+          precoProduto.setText("");
+          adapter.notifyDataSetChanged();
+        } else {
+          Toast.makeText(MainActivity.this, "Produto já cadastrado no sistema", Toast.LENGTH_SHORT).show();
+        }
+      }
+
+      @Override
+      public void onCancelled(@NonNull DatabaseError error) {
+      }
+    });
     return true;
   }
 
@@ -78,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
   }
 
   public void carrega() {
-    DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
     reference.child("Produtos").addValueEventListener(new ValueEventListener() {
       @Override
       public void onDataChange(@NonNull DataSnapshot snapshot) {
