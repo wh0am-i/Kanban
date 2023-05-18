@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
   EditText nomeProduto, categoriaProduto, precoProduto, search;
   Button cadastrar;
   int productId;
+  MediaPlayer player;
 
   Adaptador adapter;
   DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
@@ -52,12 +54,49 @@ public class MainActivity extends AppCompatActivity {
     search = findViewById(R.id.search);
   }
 
-  public boolean cadastrarProduto() {
+  public boolean verificaInputs() {
     if (nomeProduto.getText().toString().equals("") || categoriaProduto.getText().toString().equals("") || precoProduto.getText().toString().equals("")) {
       Toast.makeText(this, "Insira todos os campos para criar o produto!", Toast.LENGTH_SHORT).show();
+      tocarAudio("alerta");
       return false;
     }
+    return true;
+  }
 
+  public void tocarAudio(String tipo) {
+    if (player == null) {
+      if (tipo.equals("criado")) {
+        player = MediaPlayer.create(MainActivity.this, R.raw.criado);
+      } else if (tipo.equals("erro")) {
+        player = MediaPlayer.create(MainActivity.this, R.raw.erro);
+      } else {
+        player = MediaPlayer.create(MainActivity.this, R.raw.alerta);
+      }
+      player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+        @Override
+        public void onCompletion(MediaPlayer mediaPlayer) {
+          stopPlayer();
+        }
+      });
+    }
+    player.start();
+  }
+
+  private void stopPlayer() {
+    if (player != null) {
+      player.release();
+      player = null;
+    }
+  }
+
+  @Override
+  protected void onStop() {
+    super.onStop();
+    stopPlayer();
+  }
+
+  public boolean cadastrarProduto() {
+    if (!verificaInputs()) return false;
     reference.child("Produtos").child(nomeProduto.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
       @Override
       public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -69,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
             productId = listaProdutos.get(ultimaPosicao).getId();
             productId++;
           }
+          tocarAudio("criado");
           Produto p1 = new Produto(nomeProduto.getText().toString(), categoriaProduto.getText().toString(), Float.parseFloat(precoProduto.getText().toString()), productId);
           p1.salvar();
           nomeProduto.setText("");
@@ -76,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
           precoProduto.setText("");
           adapter.notifyDataSetChanged();
         } else {
+          tocarAudio("erro");
           Toast.makeText(MainActivity.this, "Produto já cadastrado no sistema", Toast.LENGTH_SHORT).show();
         }
       }
@@ -129,7 +170,6 @@ public class MainActivity extends AppCompatActivity {
 
       @Override
       public void onCancelled(@NonNull DatabaseError error) {
-
       }
     });
   }
